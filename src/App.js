@@ -12,11 +12,26 @@ function App() {
  
    useEffect(() => {
      getData();
-     console.log(data);
    }, []);
 
   function d(){
     setYo(yo + 1);
+  }
+
+  // VERY IMPORTANT
+  // add the question mark before mapping, it might be null/undefined before trying to map
+  function MyComponent() {
+    return (
+      <div>
+        {data.entities?.map((entity, index) => (
+          <div key={index}>
+            <h2>{entity.primaryTitle}</h2>
+            <p>{entity.titleType}</p>
+            <img src={entity.posterUrl} alt={entity.primaryTitle} />
+          </div>
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -29,7 +44,16 @@ function App() {
         <button onClick={d}>click me</button>
         <p>{yo}</p>
 
-        <p>{data[0]}</p>
+         <p>{data.currentPage}</p> 
+         <p>{data.nextPage}</p> 
+         <p>{data.previousPage}</p> 
+         <p>{data.numberOfPages}</p> 
+         <p>{data.numberOfEntities}</p> 
+
+          <p>looke here</p>
+          <div>
+            {MyComponent()} 
+          </div>
         <a
           className="App-link"
           href="https://reactjs.org"

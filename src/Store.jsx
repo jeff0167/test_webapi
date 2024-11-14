@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import axios from "axios";
 
+// https://localhost:7154/api/titles?page=0&pageSize=10
+// https://localhost:7154/api/titles
+
 const useStore = create(set =>({ // this is a hook, name it what ever you want
     loading: false,
     hasErrors: false,
@@ -13,7 +16,7 @@ const useStore = create(set =>({ // this is a hook, name it what ever you want
         set(() => ({ loading: true }));
         try {
           const response = await axios.get(
-            "https://localhost:7154/api/titles"
+            "https://localhost:7154/api/titles?page=0&pageSize=10"
           );
           set((state) => ({ data: (state.data = response.data), loading: false }));
         } catch (err) {
